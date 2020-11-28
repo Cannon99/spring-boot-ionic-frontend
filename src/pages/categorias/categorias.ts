@@ -44,4 +44,8 @@ export class CategoriasPage {
     console.log(response);
   }*/
 
+  showProdutos() {
+    this.navCtrl.push('ProdutosPage');
+  }
+
 }
