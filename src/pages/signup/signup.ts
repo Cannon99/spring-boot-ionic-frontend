@@ -25,10 +25,10 @@ export class SignupPage {
     public estadoService: EstadoService
     ) {
       this.formGroup = this.formBuilder.group({
-        nome: ['Rei',[Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+        nome: ['Rei99',[Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
         email: ['rei@rei.com', [Validators.required, Validators.email]],
         tipo: ['1', [Validators.required]],
-        cpfOuCnpj: ['99227078029', [Validators.required, Validators.min(11), Validators.maxLength(14)]],
+        cpfOuCnpj: ['99227078029', [Validators.required, Validators.minLength(11), Validators.maxLength(14)]],
         senha: ['9999', [Validators.required]],
         logradouro: ['Rua do Rei', [Validators.required]],
         numero: ['99', [Validators.required]],
