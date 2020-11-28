@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="md-menu"></ion-icon>
     </button>
-    <ion-title>ProdutoDetail</ion-title>
+    <ion-title>Detalhes</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -19,6 +19,6 @@
       </p>
     </ion-card-content>
   
-    <button ion-button block outline>Adicionar ao carrinho</button>
+    <button ion-button block outline (click)="addToCart(item)">Adicionar ao carrinho</button>
   </ion-card>
 </ion-content>
