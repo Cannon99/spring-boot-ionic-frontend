@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { API_CONFIG } from '../../config/api.config';
 import { ProdutoDTO } from '../../models/produto.dto';
+import { ProdutoService } from '../../services/domain/produto.service';
 
 /**
  * Generated class for the ProdutoDetailPage page.
@@ -20,15 +22,25 @@ export class ProdutoDetailPage {
 
   constructor(
     public navCtrl: NavController, 
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public produtoService: ProdutoService) {
   }
 
   ionViewDidLoad() {
-    this.item = {
-      id: "9",
-      nome: "Mata do Rei",
-      preco: 99999999
-    }
+    this.produtoService.findById(this.navParams.get('prod'))
+      .subscribe(response => {
+        this.item = response;
+        this.loadImageFromBucket();
+      },
+      error => {}); 
   }
 
+  loadImageFromBucket() {
+    let id = this.navParams.get('prod');
+    this.produtoService.getImageFromBuket(id)
+      .subscribe(response => {
+        this.item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${id}.jpg`
+      },
+      error => {});
+  }
 }
