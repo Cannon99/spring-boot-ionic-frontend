@@ -39,6 +39,8 @@ export class CartService {
                 quantidade: 1,
                 produto: produto
             });
+        }else{
+            cart.itens[position].quantidade++;
         }
         this.storage.setCart(cart);
         return cart;
