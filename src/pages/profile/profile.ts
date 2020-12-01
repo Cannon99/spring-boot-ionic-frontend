@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { CameraOptions } from '@ionic-native/camera/ngx';
+import { CameraOptions } from '@ionic-native/camera';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
 import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { StorageService } from '../../services/storage_service';
-import { Camera } from '@ionic-native/camera/ngx';
+import { Camera } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -30,6 +30,10 @@ export class ProfilePage {
     }
 
   ionViewDidLoad() {
+    this.loadData();
+  }
+
+  loadData() {
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
       //this.email = localUser.email;
@@ -72,6 +76,19 @@ export class ProfilePage {
      this.picture = 'data:image/png;base64,' + imageData;
      this.cameraOn = false;
     }, (error) => {});
+  }
+
+  sendPicture() {
+    this.clienteService.uploadPicture(this.picture)
+    .subscribe(response => {
+      this.picture = null;
+      this.loadData();
+    },
+    error => {});
+  }
+
+  cancel() {
+    this.picture = null;
   }
 
 }
